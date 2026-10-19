@@ -38,7 +38,7 @@
     themeButton.setAttribute("aria-label", nextLabel);
     themeButton.title = nextLabel;
     document.querySelector('meta[name="theme-color"]').content =
-      state.theme === "dark" ? "#1e211f" : "#f6f4ef";
+      state.theme === "dark" ? "#151a20" : "#f1f2f2";
   };
 
   themeButton.addEventListener("click", () => {

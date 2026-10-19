@@ -10,7 +10,7 @@
 | --- | --- | --- | --- |
 | BASE-01 | `index.html`, `css/`, `js/`, `images/` 분리 | 루트 문서, `style.css`, 기능별 JS, SVG 이미지 | 파일 트리 확인 |
 | BASE-02 | 외부 CSS·JS 연결 | `index.html`의 `link`, `script src` | Network에서 정적 파일의 정상 응답 확인 |
-| BASE-03 | VS Code + Live Server | README 실행 안내 | VS Code에서 Open with Live Server로 실행 |
+| BASE-03 | VS Code + Live Server | README 실행 안내, `.vscode` 설정·추천 확장, 로컬 Live Server 확장 설치 확인 | VS Code에서 Open with Live Server로 실행 |
 | HTML-01 | 시맨틱 태그 사용 | `header`, `nav`, `main`, `section`, `footer`; API 카드의 `article` | 초기 HTML 및 API 완료 후 DOM 확인 |
 | HTML-02 | Hero 인사말·CTA | `#hero`의 소개와 Projects·Contact 링크 | 두 CTA의 대상 이동 확인 |
 | HTML-03 | About 자기소개·프로필 | `#about`, `#profile-image` | 이미지 표시와 오류 시 로컬 대체 확인 |
@@ -19,7 +19,7 @@
 | HTML-06 | Contact 폼 | `#contact-form` | 이름·이메일·메시지 입력 확인 |
 | HTML-07 | Footer 저작권·소셜 | `#footer`, GitHub 링크, 현재 연도 | 링크 대상과 연도 확인 |
 | HTML-08 | 각 섹션 앵커 메뉴 | `#nav-links`의 Hero·About·Skills·Projects·Contact·Footer | 모든 `href="#..."`가 실제 고유 ID를 가리키는지 확인 |
-| HTML-09 | 의미 있는 이미지 alt | 작업 공간 설명과 GitHub 프로필 설명 | 모든 `img`의 alt와 내용 비교 |
+| HTML-09 | 의미 있는 이미지 alt | 학습 플래너 설명과 GitHub 프로필 설명 | 모든 `img`의 alt와 내용 비교 |
 | HTML-10 | label 연결 | `for="contact-name/email/message"`, 해당 ID | label 클릭 시 입력 포커스 확인 |
 
 ## 2. CSS·반응형 — PDF 2~3쪽
@@ -30,7 +30,7 @@
 | CSS-02 | `:root` 색상·폰트·간격 변수 | `--color-*`, `--font-*`, `--space-*` | 정의와 `var()` 사용 확인 |
 | CSS-03 | 다크 테마 변수 | `[data-theme="dark"]` | 밝은·어두운 테마 계산 스타일 비교 |
 | CSS-04 | 네비게이션 Flexbox | `.navigation`, `.nav-links`, `.nav-actions` | 넓은 화면에서 로고 왼쪽·메뉴 오른쪽 확인 |
-| CSS-05 | 프로젝트 반응형 Grid | `.projects-grid`: `repeat(auto-fit, minmax(min(100%, 19rem), 1fr))` | 열 수 변경·작은 화면 가로 넘침 확인 |
+| CSS-05 | 프로젝트 반응형 Grid | `.projects-grid`: `repeat(auto-fit, minmax(min(100%, 18rem), 1fr))` | 열 수 변경·작은 화면 가로 넘침 확인 |
 | CSS-06 | 모바일 퍼스트 | 기본 한 열 배치, `min-width`로 확장 | 작은 화면 기본 스타일 확인 |
 | CSS-07 | 768px·1024px 분기 | 두 `@media (min-width: ...)` | 767/768px, 1023/1024px 비교 |
 | CSS-08 | 모바일 메뉴 숨김·햄버거 | `.nav-links`, `.nav-links.active`, `.menu-toggle` | 767px 이하 초기 상태와 768px 이상 비교 |
@@ -121,7 +121,7 @@
 | --- | --- | --- |
 | RULE-01 | 순수 HTML·CSS·JS, 외부 UI 라이브러리 금지 | React/Vue/jQuery/Bootstrap/Tailwind 의존성 없음. 브라우저 기본 API와 로컬 SVG 사용 |
 | RULE-02 | 인라인 style 금지 | 정적 HTML, 생성 템플릿, DOM 스타일 직접 할당을 확인. 클래스·데이터 속성으로 스타일 제어 |
-| RULE-03 | 최신 Chrome 정상 동작 | 내장 브라우저에서 기능·레이아웃·콘솔 확인. 독립 Chrome 앱 전체 검증은 검증 기록의 추가 확인 범위 참고 |
+| RULE-03 | 최신 Chrome 정상 동작 | Chrome 155.0.8059.82 및 내장 브라우저에서 기능·레이아웃 확인. 상세 결과는 검증 기록 참고 |
 
 보조 접근성: skip link, `:focus-visible`, 의미 있는 이미지 설명, 폼 `aria-describedby`, 메뉴 `aria-expanded`, 상태 영역 `role="status"`, 필터 `aria-pressed`, 새 탭 링크 `rel="noopener noreferrer"`를 적용했습니다.
 
@@ -149,9 +149,9 @@
 
 ## 11. 검증 기록과 재현 시나리오
 
-2026년 10월 19일 실제 브라우저에서 320·375·768·1024·1440px의 가로 넘침, 반응형 카드 열 수, 실제 API 저장소 8개 및 Python 필터 3개와 정렬, 다크 모드 새로고침 유지, 폼 오류·성공, 모바일 메뉴 닫기, 667×320 가로 모바일 메뉴 접근을 확인했습니다. 확인한 세션의 콘솔 오류·경고는 0건이며 이미지 2개가 정상 로드되었습니다.
+2026년 10월 19일 원본 PDF를 다시 대조하고 플래너 디자인으로 변경한 후 재검증했습니다. Chrome에서 320·375·767·768·1023·1024·1440px 레이아웃, 프로젝트 7개 및 Python 필터 3개, 정렬, 모바일 메뉴, 다크 모드 복원, 폼 오류·성공을 확인했습니다. 임시 모의 응답 페이지에서는 로딩·빈 상태·403 오류·재시도 복구를 확인했습니다.
 
-본문 바로가기는 실제 키보드의 첫 Tab으로 링크에 도달하고 Enter 후 `main-content` 포커스를 확인했습니다. 추가로 `node --test tests/*.test.mjs` 자동 테스트 42개가 모두 통과했습니다(`main` 5, `projects` 18, `contact` 14, `structure` 5). 실제 브라우저 검증·모의 검증·미실행 항목의 구분은 [검증 기록](verification.md)을 기준으로 합니다. 아래 표는 **재현 방법과 기대 결과**이며, 표 전체가 실제 브라우저에서 실행 완료되었다는 뜻은 아닙니다.
+자동 테스트 46개도 모두 통과했습니다(`main` 5, `projects` 22, `contact` 14, `structure` 5). 실제 브라우저 검증과 모의 검증의 구분 및 한계는 [검증 기록](verification.md)을 기준으로 합니다. 아래 표는 재현 절차입니다.
 
 | 시나리오 | 조작 | 기대 결과 |
 | --- | --- | --- |
