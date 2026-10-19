@@ -8,6 +8,7 @@
 | GitHub Pages | [포트폴리오 보기](https://leeaain2025.github.io/codyssey-b1-1/) — 배포 완료 |
 | 요구사항 대응표 | [기능·규칙·검증 절차](docs/requirements.md) |
 | 검증 기록 | [실제 확인 결과와 추가 확인 항목](docs/verification.md) |
+| 프로젝트 소개 | [선정 기준과 소개 문구의 근거](docs/projects.md) |
 | 학습 자료 | [웹 기초 학습 교재](study-guide/README.md) |
 
 ## 실행 방법
@@ -41,7 +42,7 @@ python3 -m http.server 5500
 | Hero | 인사말, 작업 공간 일러스트, 프로젝트·연락 영역으로 이동하는 CTA |
 | About | 자기소개, GitHub 프로필 이미지와 계정 링크. 이미지 오류 시 로컬 이니셜 이미지로 대체 |
 | Skills | HTML, CSS, JavaScript, Git & GitHub 기술 목록 |
-| Projects | GitHub API 카드, 로딩·성공·에러·빈 상태, 재시도, 언어 필터, 정렬 |
+| Projects | 실제 작업이 있는 GitHub 프로젝트의 한 문장 소개, API 카드, 로딩·성공·에러·빈 상태, 재시도, 언어 필터, 정렬 |
 | Contact | 이름·이메일·메시지 검증, 항목별 오류, 글자 수, 검증 완료 안내 |
 | Footer | 현재 연도의 저작권 표시와 GitHub 소셜 링크 |
 
@@ -59,7 +60,7 @@ python3 -m http.server 5500
 ├── css/
 │   └── style.css              # 테마 변수, 레이아웃, 반응형, 모션
 ├── js/
-│   ├── config.js             # 계정·이름·저장 키·스크롤 기준 설정
+│   ├── config.js             # 계정·이름·프로젝트 소개·저장 키·스크롤 기준 설정
 │   ├── main.js               # 테마, 메뉴, 스크롤, 화면 등장 효과
 │   ├── projects.js           # GitHub 요청, 카드, 필터, 정렬, 상태 화면
 │   └── contact.js            # 문의 폼 상태, 검증, 화면 갱신
@@ -71,6 +72,7 @@ python3 -m http.server 5500
 ├── docs/
 │   ├── requirements.md       # 과제 요구사항과 구현 위치·검증 방법
 │   ├── verification.md       # 실제 브라우저 검증과 미확인 범위
+│   ├── projects.md           # 프로젝트 선정 기준과 소개 문구의 근거
 │   └── screenshots/          # 데스크톱·모바일·다크 모드 캡처
 ├── study-guide/
 │   └── README.md             # 여섯 가지 학습 목표를 설명하는 교재
@@ -118,7 +120,7 @@ React, Vue, jQuery, Bootstrap, Tailwind를 사용하지 않았습니다. 인라�
   → state.isLoading = true
   → 로딩 패널 표시
   → await fetch(...), await response.json()
-  → 성공: state.repositories 저장 → renderRepositories()
+  → 성공: 소개 목록과 대조 → 선정한 state.repositories 저장 → renderRepositories()
   → 실패: 에러 패널과 재시도 버튼 표시
 
 언어 필터 click / 정렬 change
@@ -127,7 +129,7 @@ React, Vue, jQuery, Bootstrap, Tailwind를 사용하지 않았습니다. 인라�
   → map(renderCard).join("") → 카드 DOM 갱신
 ```
 
-서버에서 가져온 원본 목록과 현재 필터를 별도로 저장합니다. `filter`가 만든 새 배열을 정렬하기 때문에 원본 순서가 변하지 않습니다. `map`은 저장소 객체 각각을 카드 HTML로 변환합니다. `renderCard`의 구조분해 할당으로 이름·설명·주소 등을 꺼내고, 템플릿 리터럴로 마크업을 구성합니다.
+서버에서 가져와 선정한 프로젝트 목록과 현재 언어 필터를 별도로 저장합니다. `filter`가 만든 새 배열을 정렬하기 때문에 선정 목록의 원래 순서가 변하지 않습니다. `map`은 저장소 객체 각각을 카드 HTML로 변환합니다. `renderCard`의 구조분해 할당으로 이름·설명·주소 등을 꺼내고, 템플릿 리터럴로 마크업을 구성합니다.
 
 ### 3. 문의 폼
 
@@ -165,7 +167,9 @@ submit
 
 등장 효과는 한 번 보인 요소를 `unobserve`하여 반복하지 않습니다. `prefers-reduced-motion: reduce`이거나 Intersection Observer를 지원하지 않는 환경에서는 콘텐츠를 숨기지 않습니다. 모션 줄이기가 켜진 환경에서는 부드러운 이동도 즉시 이동으로 바뀝니다.
 
-`js/config.js`에서 이름, GitHub 계정, 공개 연락 이메일과 기준값을 관리합니다. 테마 저장 키는 `leeaain2025-portfolio-theme`입니다. `contactEmail`은 현재 비어 있습니다.
+`js/config.js`에서 이름, GitHub 계정, 프로젝트 소개, 공개 연락 이메일과 기준값을 관리합니다. 테마 저장 키는 `leeaain2025-portfolio-theme`입니다. `contactEmail`은 현재 비어 있습니다.
+
+`projectDescriptions`는 `"소유자/저장소": "한 문장 소개"` 형식의 선정 목록입니다. 실제 파일과 커밋을 확인한 7개 프로젝트를 등록했고, 초기 README만 있는 `codyssey-b2-1`은 제외했습니다. 새 프로젝트를 소개하려면 내용을 확인한 뒤 이 목록에 추가합니다. 파일 크기나 커밋 수만으로 자동 판정하지 않습니다. [선정 기준과 근거](docs/projects.md)를 참고하세요.
 
 ## GitHub API와 네 가지 화면 상태
 
@@ -177,18 +181,20 @@ https://api.github.com/users/leeaain2025/repos?per_page=100&sort=updated&directi
 
 인증 없이 사용자가 소유한 공개 저장소를 조회하며, 다음 페이지가 있으면 응답의 `Link` 헤더를 따라 추가 요청합니다. 페이지당 최대 100개를 요청하고 `id`로 중복을 제거합니다. 공개 저장소 조회와 매개변수는 [GitHub 공식 문서](https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user)를 따릅니다.
 
+API에서 실제로 반환된 저장소 중 `projectDescriptions`에 유효한 소개가 등록된 항목만 카드로 표시합니다. 소개는 직접 작성한 문장을 사용하고 이름·언어·별·포크·업데이트 날짜·링크는 API 값을 사용합니다. 필터와 개수도 선정 목록을 기준으로 계산합니다. 목록에 적어 두어도 API에 없는 저장소는 표시하지 않습니다. `projectDescriptions` 설정을 생략하면 기존처럼 API 전체 목록과 GitHub 설명을 사용합니다.
+
 | 상태 | 사용자에게 보이는 내용 | 처리 |
 | --- | --- | --- |
 | 로딩 | 스피너와 “프로젝트를 불러오는 중…” | 필터·정렬 비활성화, `aria-busy` 설정 |
 | 성공 | 저장소 이름·설명·언어·별·포크·업데이트 날짜·링크 카드 | 필터와 정렬 사용 가능 |
 | 실패 | “프로젝트를 불러올 수 없습니다”와 원인 안내·재시도 버튼 | HTTP 오류, 네트워크 오류, 잘못된 JSON, 응답 시간 초과 처리 |
-| 빈 상태 | “표시할 프로젝트가 없습니다” | 빈 배열 또는 선택한 언어에 결과가 없는 경우 구분 |
+| 빈 상태 | “표시할 프로젝트가 없습니다” | 빈 배열·선정 결과 없음 또는 선택한 언어에 결과가 없는 경우 구분 |
 
 `fetch`는 HTTP 403/404 등의 상태만으로 예외를 던지지 않으므로 `response.ok`를 직접 검사합니다. 403·429는 요청 제한 안내, 404는 계정 확인 안내로 처리합니다. 15초 제한은 전체 목록을 가져오는 요청 묶음에 적용됩니다.
 
 인증 없는 요청의 기본 한도는 IP 주소 기준 시간당 60회이며, 같은 네트워크의 다른 요청과 한도를 공유할 수 있습니다. 추가 제한도 있으므로 요청 실패 시 잠시 기다린 뒤 재시도하세요. [GitHub 요청 제한 안내](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)
 
-클라이언트 코드에는 인증 토큰을 넣지 않습니다. API 문자열은 HTML 특수문자를 이스케이프한 후 카드에 넣고, 저장소 링크는 `https://github.com` 주소만 허용합니다. API에서 설명이나 언어가 비어 있으면 대체 문구 또는 “기타”를 표시합니다.
+클라이언트 코드에는 인증 토큰을 넣지 않습니다. API 문자열과 직접 작성한 소개 모두 HTML 특수문자를 이스케이프한 후 카드에 넣고, 저장소 링크는 `https://github.com` 주소만 허용합니다. API에서 언어가 비어 있으면 “기타”를 표시합니다. 선정 설정을 생략한 경우에는 빈 설명에 대체 문구를 표시합니다.
 
 ## 문의 폼의 범위
 
@@ -208,7 +214,7 @@ https://api.github.com/users/leeaain2025/repos?per_page=100&sort=updated&directi
 6. **접근성·모션:** Tab·Shift+Tab·Enter·Escape로 이동합니다. 본문 바로가기, 버튼 이름, 포커스 표시를 확인합니다. 모션 줄이기 설정에서도 모든 콘텐츠가 보이는지 확인합니다.
 7. **배포:** 공개 후 GitHub Pages 주소에서 위 흐름을 다시 확인합니다. 하위 경로 배포에서도 CSS·JS·SVG가 로드되는지 확인합니다.
 
-2026년 10월 19일 로컬 HTTP 환경의 실제 브라우저에서 다음을 확인했습니다.
+2026년 10월 19일 최초 구현의 로컬 HTTP 환경에서 다음을 확인했습니다. 아래 8개 표시는 프로젝트 선정 기능을 적용하기 전의 기록입니다.
 
 - 320·375·768·1024·1440px에서 가로 넘침 없음. 프로젝트는 375px에서 1열, 768·1024px에서 2열, 1440px에서 3열로 표시되었습니다.
 - 실제 GitHub API에서 공개 저장소 8개를 표시했고, Python 필터에서 3개가 표시되며 정렬이 동작했습니다. 저장소 수는 계정 변경에 따라 달라질 수 있습니다.
@@ -218,7 +224,7 @@ https://api.github.com/users/leeaain2025/repos?per_page=100&sort=updated&directi
 - 키보드의 첫 Tab으로 본문 바로가기 링크에 도달하고 Enter로 실행하면 `main-content`에 포커스가 이동했습니다.
 - 두 이미지가 로드되었고, 확인한 브라우저 세션의 콘솔 오류·경고는 0건이었습니다.
 
-별도로 **자동 테스트 42개가 모두 통과**했습니다. `main` 5개, `projects` 18개, `contact` 14개, `structure` 5개로 구성되며 Node의 기본 테스트 러너와 DOM·네트워크 모의 환경을 사용합니다. 테스트만 실행할 때 Node.js가 필요하고, 사이트 실행에는 Node.js가 필요하지 않습니다.
+프로젝트 선정 기능을 포함한 **자동 테스트 46개가 모두 통과**했습니다. `main` 5개, `projects` 22개, `contact` 14개, `structure` 5개로 구성되며 Node의 기본 테스트 러너와 DOM·네트워크 모의 환경을 사용합니다. 추가 4개는 소개 교체·선정 목록의 필터와 개수·API 교집합·빈 결과·유효하지 않은 소개·HTML 이스케이프를 검증합니다. 테스트만 실행할 때 Node.js가 필요하고, 사이트 실행에는 Node.js가 필요하지 않습니다.
 
 ```bash
 node --test tests/*.test.mjs
@@ -226,7 +232,7 @@ node --test tests/*.test.mjs
 
 자동 테스트는 스크롤 경계, 저장소 예외, 등장 효과 임계값, API 오류·빈 목록·재시도·페이지네이션·인코딩, 폼 검증, 소스 구조를 확인합니다. **브라우저에서 API 오류·빈 상태를 강제 재현한 결과와 모션 줄이기 화면은 위 브라우저 결과에 포함되지 않습니다.** 정확한 수행 범위와 추가 절차는 [검증 기록](docs/verification.md)에 구분했습니다.
 
-GitHub Pages 빌드 성공을 확인한 뒤 공개 주소에서도 CSS·JS·이미지 로드, GitHub 저장소 8개 표시, 다크 모드 새로고침 유지, 모바일 메뉴 이동, 유효한 문의 폼 제출 안내를 확인했습니다. 배포 화면의 콘솔 오류·경고는 0건이었습니다.
+최초 GitHub Pages 빌드 성공을 확인한 뒤 공개 주소에서도 CSS·JS·이미지 로드, GitHub 저장소 8개 표시, 다크 모드 새로고침 유지, 모바일 메뉴 이동, 유효한 문의 폼 제출 안내를 확인했습니다. 당시 배포 화면의 콘솔 오류·경고는 0건이었습니다.
 
 ## 스크린샷
 

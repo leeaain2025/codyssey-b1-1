@@ -70,6 +70,21 @@
     return Number.isFinite(timestamp) ? timestamp : 0;
   };
 
+  const selectRepositories = (repositories, username) => {
+    const descriptions = window.PORTFOLIO_CONFIG?.projectDescriptions;
+    if (!descriptions) return repositories;
+
+    // 실제 API 목록 중 검토한 프로젝트만 고른다. API의 이름·언어·별·날짜는 유지한다.
+    return repositories.map((repository) => {
+      const key = typeof repository.full_name === "string"
+        ? repository.full_name
+        : `${username}/${repository.name}`;
+      const description = Object.hasOwn(descriptions, key) ? descriptions[key] : null;
+      if (typeof description !== "string" || !description.trim()) return null;
+      return { ...repository, description: description.trim() };
+    }).filter((repository) => repository !== null);
+  };
+
   const renderPanel = (kind, title, description, canRetry = false) => {
     statePanel.dataset.state = kind;
     statePanel.hidden = false;
@@ -152,7 +167,7 @@
         "표시할 프로젝트가 없습니다",
         hasRepositories
           ? "선택한 언어의 프로젝트가 없습니다. 다른 언어를 선택해 주세요."
-          : "아직 공개된 프로젝트가 없습니다. 새로운 작업으로 곧 찾아올게요.",
+          : "아직 소개할 프로젝트가 없습니다. 새로운 작업으로 곧 찾아올게요.",
       );
       filters.hidden = !hasRepositories;
       sortSelect.disabled = !hasRepositories;
@@ -276,7 +291,8 @@
         throw new Error("연결된 GitHub 계정 이름을 확인해 주세요.");
       }
 
-      state.repositories = await fetchAllRepositories(username, controller.signal);
+      const repositories = await fetchAllRepositories(username, controller.signal);
+      state.repositories = selectRepositories(repositories, username);
       state.language = "";
       state.isLoading = false;
       renderLanguageFilters();

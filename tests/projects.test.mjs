@@ -7,9 +7,9 @@ const ids = [
   "projects-grid", "projects-status", "projects-state", "projects-state-title",
   "projects-state-description", "projects-retry", "project-filters", "project-sort", "project-count",
 ];
-const mount = (fetch, githubUsername = "example") => mountScript("projects.js", ids, {
+const mount = (fetch, githubUsername = "example", config = {}) => mountScript("projects.js", ids, {
   fetch,
-  config: { githubUsername },
+  config: { githubUsername, ...config },
 });
 const stateOf = (app) => app.elements["projects-state"].dataset.state;
 const pageTwo = '<https://api.github.com/users/example/repos?page=2>; rel="next"';
@@ -124,6 +124,81 @@ test("필터와 정렬을 반복해도 전체 목록을 잃지 않고 선택 상
   e["project-filters"].buttons.find((button) => button.dataset.language === "").dispatch("click");
   assert.equal(e["project-count"].textContent, "3");
   assert.equal(css.getAttribute("aria-pressed"), "false");
+});
+
+test("선정한 실제 저장소의 소개를 교체하고 필터와 개수도 선정 목록을 따른다", async () => {
+  const app = mount(async () => response([
+    repository(1, { full_name: "example/real-project", language: "Python" }),
+    repository(2, { language: "CSS" }),
+    repository(3, { language: "Ruby" }),
+  ]), "example", {
+    projectDescriptions: {
+      "example/real-project": "직접 만든 자료구조로 키와 값을 저장합니다.",
+      "example/project-1": "full_name보다 이름을 먼저 사용하면 안 됩니다.",
+      "example/project-2": "화면 크기에 맞게 배치가 바뀌는 페이지입니다.",
+    },
+  });
+  await settle();
+  const { elements: e } = app;
+  assert.equal(stateOf(app), "success");
+  assert.equal(e["project-count"].textContent, "2");
+  assert.match(e["projects-grid"].innerHTML, /직접 만든 자료구조로 키와 값을 저장합니다\./);
+  assert.match(e["projects-grid"].innerHTML, /화면 크기에 맞게 배치가 바뀌는 페이지입니다\./);
+  assert.doesNotMatch(e["projects-grid"].innerHTML, /프로젝트 [12] 소개|project-3|이름을 먼저/);
+  assert.deepEqual(e["project-filters"].buttons.map((button) => button.dataset.language).sort(), ["", "CSS", "Python"]);
+  e["project-filters"].buttons.find((button) => button.dataset.language === "CSS").dispatch("click");
+  assert.equal(e["project-count"].textContent, "1");
+  assert.match(e["projects-grid"].innerHTML, /project-2/);
+  assert.doesNotMatch(e["projects-grid"].innerHTML, /project-1/);
+  e["project-filters"].buttons.find((button) => button.dataset.language === "").dispatch("click");
+  assert.equal(e["project-count"].textContent, "2");
+});
+
+test("소개 목록에만 있는 저장소를 만들지 않고 교집합이 없으면 정상 빈 상태를 표시한다", async () => {
+  const app = mount(async () => response([repository(1)]), "example", {
+    projectDescriptions: { "example/missing-repository": "API 응답에는 없는 프로젝트입니다." },
+  });
+  await settle();
+  const { elements: e } = app;
+  assert.equal(stateOf(app), "empty");
+  assert.equal(e["project-count"].textContent, "0");
+  assert.equal(e["projects-grid"].innerHTML, "");
+  assert.equal(e["project-filters"].hidden, true);
+  assert.equal(e["projects-retry"].hidden, true);
+});
+
+test("빈 소개와 잘못된 소개 값 및 상속받은 항목은 선정 목록에서 제외한다", async () => {
+  const projectDescriptions = Object.assign(Object.create({
+    "example/project-2": "직접 등록하지 않은 상속 항목입니다.",
+  }), {
+    "example/project-1": "직접 등록한 프로젝트입니다.",
+    "example/project-3": "",
+    "example/project-4": "   ",
+    "example/project-5": 123,
+    "example/project-6": { description: "문자열이 아닙니다." },
+    "example/project-7": null,
+  });
+  const app = mount(async () => response(
+    Array.from({ length: 7 }, (_, index) => repository(index + 1)),
+  ), "example", { projectDescriptions });
+  await settle();
+  assert.equal(stateOf(app), "success");
+  assert.equal(app.elements["project-count"].textContent, "1");
+  assert.match(app.elements["projects-grid"].innerHTML, /직접 등록한 프로젝트입니다\./);
+  assert.doesNotMatch(app.elements["projects-grid"].innerHTML, /project-[2-7]/);
+});
+
+test("직접 작성한 소개의 HTML도 실행할 수 없는 텍스트로 출력한다", async () => {
+  const app = mount(async () => response([repository(1)]), "example", {
+    projectDescriptions: {
+      "example/project-1": '<img src=x onerror="alert(1)"> & <script>alert(2)</script>',
+    },
+  });
+  await settle();
+  const html = app.elements["projects-grid"].innerHTML;
+  assert.equal(stateOf(app), "success");
+  assert.match(html, /&lt;img src=x onerror=&quot;alert\(1\)&quot;&gt; &amp; &lt;script&gt;alert\(2\)&lt;\/script&gt;/);
+  assert.doesNotMatch(html, /<img|<script/);
 });
 
 test("API 문자열을 이스케이프하고 위험하거나 위장한 저장소 링크를 만들지 않는다", async () => {
