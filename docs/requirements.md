@@ -19,7 +19,7 @@
 | HTML-06 | Contact 폼 | `#contact-form` | 이름·이메일·메시지 입력 확인 |
 | HTML-07 | Footer 저작권·소셜 | `#footer`, GitHub 링크, 현재 연도 | 링크 대상과 연도 확인 |
 | HTML-08 | 각 섹션 앵커 메뉴 | `#nav-links`의 Hero·About·Skills·Projects·Contact·Footer | 모든 `href="#..."`가 실제 고유 ID를 가리키는지 확인 |
-| HTML-09 | 의미 있는 이미지 alt | 학습 플래너 설명과 GitHub 프로필 설명 | 모든 `img`의 alt와 내용 비교 |
+| HTML-09 | 의미 있는 이미지 alt | GitHub 프로필 설명과 오류 시 이니셜 이미지 설명 | 모든 `img`의 alt와 내용 비교 |
 | HTML-10 | label 연결 | `for="contact-name/email/message"`, 해당 ID | label 클릭 시 입력 포커스 확인 |
 
 ## 2. CSS·반응형 — PDF 2~3쪽
