@@ -5,7 +5,7 @@
 | 항목 | 주소 / 상태 |
 | --- | --- |
 | GitHub 저장소 | [leeaain2025/codyssey-b1-1](https://github.com/leeaain2025/codyssey-b1-1) |
-| GitHub Pages | [포트폴리오 보기](https://leeaain2025.github.io/codyssey-b1-1/) — 배포 예정 |
+| GitHub Pages | [포트폴리오 보기](https://leeaain2025.github.io/codyssey-b1-1/) — 배포 완료 |
 | 요구사항 대응표 | [기능·규칙·검증 절차](docs/requirements.md) |
 | 검증 기록 | [실제 확인 결과와 추가 확인 항목](docs/verification.md) |
 | 학습 자료 | [웹 기초 학습 교재](study-guide/README.md) |
@@ -224,7 +224,9 @@ https://api.github.com/users/leeaain2025/repos?per_page=100&sort=updated&directi
 node --test tests/*.test.mjs
 ```
 
-자동 테스트는 스크롤 경계, 저장소 예외, 등장 효과 임계값, API 오류·빈 목록·재시도·페이지네이션·인코딩, 폼 검증, 소스 구조를 확인합니다. **브라우저에서 API 오류·빈 상태를 강제 재현한 결과, 모션 줄이기 화면, 배포 주소 검증은 위 브라우저 결과에 포함되지 않습니다.** 정확한 수행 범위와 추가 절차는 [검증 기록](docs/verification.md)에 구분했습니다.
+자동 테스트는 스크롤 경계, 저장소 예외, 등장 효과 임계값, API 오류·빈 목록·재시도·페이지네이션·인코딩, 폼 검증, 소스 구조를 확인합니다. **브라우저에서 API 오류·빈 상태를 강제 재현한 결과와 모션 줄이기 화면은 위 브라우저 결과에 포함되지 않습니다.** 정확한 수행 범위와 추가 절차는 [검증 기록](docs/verification.md)에 구분했습니다.
+
+GitHub Pages 빌드 성공을 확인한 뒤 공개 주소에서도 CSS·JS·이미지 로드, GitHub 저장소 8개 표시, 다크 모드 새로고침 유지, 모바일 메뉴 이동, 유효한 문의 폼 제출 안내를 확인했습니다. 배포 화면의 콘솔 오류·경고는 0건이었습니다.
 
 ## 스크린샷
 
@@ -252,4 +254,4 @@ node --test tests/*.test.mjs
 
 선택 기능으로 언어별 `filter()` 필터와 시스템 테마 감지를 구현했고, 최근 업데이트순·별이 많은 순 정렬을 추가했습니다. Hero 타이핑 효과와 외부 서비스 자동 이메일 전송은 구현하지 않았습니다.
 
-GitHub Pages 배포와 배포 주소에서의 확인을 마친 뒤 상단의 배포 예정 표기 및 검증 기록을 갱신합니다.
+GitHub Pages는 `main` 브랜치의 루트 디렉터리에서 배포합니다. 구현 설명, 요구사항 대응표, 검증 기록과 스크린샷을 저장소에 함께 보관합니다. [실제 배포 화면](docs/screenshots/deployed.png)도 확인할 수 있습니다.

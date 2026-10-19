@@ -121,7 +121,7 @@
 | --- | --- | --- |
 | RULE-01 | 순수 HTML·CSS·JS, 외부 UI 라이브러리 금지 | React/Vue/jQuery/Bootstrap/Tailwind 의존성 없음. 브라우저 기본 API와 로컬 SVG 사용 |
 | RULE-02 | 인라인 style 금지 | 정적 HTML, 생성 템플릿, DOM 스타일 직접 할당을 확인. 클래스·데이터 속성으로 스타일 제어 |
-| RULE-03 | 최신 Chrome 정상 동작 | Chrome 또는 Chromium 기반 실제 화면에서 기능·레이아웃·콘솔 확인 필요 |
+| RULE-03 | 최신 Chrome 정상 동작 | 내장 브라우저에서 기능·레이아웃·콘솔 확인. 독립 Chrome 앱 전체 검증은 검증 기록의 추가 확인 범위 참고 |
 
 보조 접근성: skip link, `:focus-visible`, 의미 있는 이미지 설명, 폼 `aria-describedby`, 메뉴 `aria-expanded`, 상태 영역 `role="status"`, 필터 `aria-pressed`, 새 탭 링크 `rel="noopener noreferrer"`를 적용했습니다.
 
@@ -140,10 +140,10 @@
 
 | ID | 요구사항 | 현재 위치 / 완료 조건 |
 | --- | --- | --- |
-| DOC-01 | 설명·기술·배포 URL·스크린샷 | README에 설명·기술·배포 예정 URL·실제 세 유형 스크린샷 포함. 배포 URL 공개 확인 필요 |
+| DOC-01 | 설명·기술·배포 URL·스크린샷 | README에 설명·기술·공개 URL·실제 세 유형 스크린샷 포함 |
 | DOC-02 | 스크롤·Observer 기준 문서화 | README에 60px / 300px / 0.2 기록 |
-| DEPLOY-01 | GitHub Pages 공개 URL | `https://leeaain2025.github.io/codyssey-b1-1/` 배포 예정. 외부 HTTP 응답과 화면 확인 필요 |
-| DEPLOY-02 | 배포 주소에서 모든 기능 | 공개 후 모바일·데스크톱·테마·API·폼 재확인 필요 |
+| DEPLOY-01 | GitHub Pages 공개 URL | `https://leeaain2025.github.io/codyssey-b1-1/` 빌드 성공 및 공개 화면 확인 |
+| DEPLOY-02 | 배포 주소에서 모든 기능 | 공개 주소에서 화면·에셋·메뉴·테마 저장·API·폼 재확인. 강제 오류 등 검증 범위는 별도 기록 |
 | DELIVERY-01 | 저장소 URL 제출 | 공개 저장소 `https://github.com/leeaain2025/codyssey-b1-1` |
 | DELIVERY-02 | 세 종류 스크린샷 | `docs/screenshots/desktop.png`, `mobile.png`, `dark.png` 생성·README 임베드. 세 유형의 전체 페이지 캡처도 포함 |
 
