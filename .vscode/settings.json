@@ -1,0 +1,7 @@
+{
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.ignoreFiles": ["**/.git/**", "**/tests/**", "**/docs/**", "**/study-guide/**"],
+  "editor.tabSize": 2,
+  "files.encoding": "utf8"
+}

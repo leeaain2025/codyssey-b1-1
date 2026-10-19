@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+node_modules/
+test-results/
+playwright-report/
+.env
+.env.*
+# 원문 과제와 기존 학습 교재는 로컬에 보존합니다.
+*.pdf
+study-guide/

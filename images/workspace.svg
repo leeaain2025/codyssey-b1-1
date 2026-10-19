@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 620" fill="none">
+  <title>호기심을 작업으로 이어가는 책상</title>
+  <ellipse cx="325" cy="478" rx="251" ry="52" fill="#9eab8c" opacity=".2"/>
+  <circle cx="319" cy="252" r="183" stroke="#b8c4a8" stroke-dasharray="4 10"/>
+  <path d="M109 226h40m-20-20v40M515 317h24m-12-12v24" stroke="#879776" stroke-width="1.5"/>
+  <circle cx="494" cy="160" r="6" fill="#b26e4f"/>
+  <circle cx="157" cy="366" r="3" fill="#879776"/>
+  <g transform="rotate(-6 338 290)">
+    <rect x="199" y="162" width="291" height="216" rx="13" fill="#535e4c"/>
+    <rect x="207" y="170" width="275" height="200" rx="7" fill="#f8f5e9"/>
+    <path d="M207 199h275" stroke="#dadbc9"/>
+    <circle cx="221" cy="184" r="3" fill="#c47a58"/><circle cx="231" cy="184" r="3" fill="#d7b47a"/><circle cx="241" cy="184" r="3" fill="#9aa77f"/>
+    <rect x="226" y="217" width="70" height="131" rx="3" fill="#e6e9da"/>
+    <path d="M238 234h43m-43 13h32m-32 13h38m-38 32h43m-43 13h27m-27 13h37" stroke="#a3b18e" stroke-width="3" stroke-linecap="round"/>
+    <path d="m329 229-15 13 15 13m70-26 15 13-15 13m-34-30-10 35" stroke="#b36a47" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M315 283h115M315 296h86M315 309h107M315 322h67M315 335h95" stroke="#b1b69f" stroke-width="4" stroke-linecap="round"/>
+    <path d="m199 378-44 44a6 6 0 0 0 4 10h364a6 6 0 0 0 4-10l-37-44H199Z" fill="#d5d8c5"/>
+    <path d="m213 386-23 25h307l-21-25H213Z" fill="#a5af94"/>
+    <path d="m294 417-5 8h94l-5-8h-84Z" fill="#b7c1a6"/>
+    <path d="M159 432h364" stroke="#7c8a6d" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(9 179 410)">
+    <rect x="92" y="369" width="136" height="98" rx="4" fill="#e5b58d"/>
+    <rect x="92" y="362" width="136" height="96" rx="4" fill="#faf4e1"/>
+    <path d="M111 381h82m-82 14h64m-64 14h78m-78 14h40" stroke="#c6c5ae" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M172 427h37" stroke="#b56644" stroke-width="2"/>
+    <path d="M104 360v101" stroke="#d6d2bb"/>
+  </g>
+  <path d="m143 335 82 120" stroke="#5b654d" stroke-width="7" stroke-linecap="round"/>
+  <path d="m225 455 9 16-15-12" fill="#ae724f"/>
+  <path d="M504 364v-70" stroke="#6e8258" stroke-width="4"/>
+  <path d="M504 337c-40 1-58-16-57-43 34 0 53 17 57 43ZM505 320c-7-34 11-63 42-65 3 31-9 51-42 65ZM503 300c-28-16-37-42-24-65 28 17 32 39 24 65Z" fill="#8da374"/>
+  <path d="M473 352h63l-10 69h-43l-10-69Z" fill="#bd7652"/>
+  <path d="M478 369h53M481 390h47" stroke="#a65d40" stroke-width="2"/>
+  <ellipse cx="504" cy="352" rx="32" ry="7" fill="#d3966e"/>
+  <ellipse cx="504" cy="352" rx="24" ry="4" fill="#6f6548"/>
+  <path d="M503 352v-13" stroke="#6e8258" stroke-width="4"/>
+  <rect x="352" y="446" width="69" height="16" rx="3" transform="rotate(6 352 446)" fill="#b8c5a3"/>
+  <rect x="354" y="432" width="65" height="15" rx="3" transform="rotate(6 354 432)" fill="#f8f2df"/>
+  <path d="m368 439 37 4" stroke="#cbc6af" stroke-width="2"/>
+</svg>

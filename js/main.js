@@ -146,7 +146,7 @@
   if ("IntersectionObserver" in window && !reducedMotion.matches) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting || entry.intersectionRatio < config.revealThreshold) return;
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
